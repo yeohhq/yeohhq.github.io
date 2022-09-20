@@ -1,0 +1,11 @@
+.ant-picker {
+    min-width: -webkit-fill-available;
+}
+
+.ant-space-item {
+    min-width: -webkit-fill-available;
+}
+
+.ant-space {
+    min-width: -webkit-fill-available;
+}
