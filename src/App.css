@@ -1,49 +1,8 @@
 @import '~antd/dist/antd.css';
 
 /* Import fonts */
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400&display=swap');
 
 body {
   font-family: 'Roboto', sans-serif;
-}
-
-.description-text {
-  margin: 20px;
-  text-align: center;
-}
-
-.ant-col {
-  align-content: center;
-  justify-content: center;
-  align-self: center;
-  justify-self: center;
-}
-
-.ant-row {
-  margin-top: 20px;
-  align-content: center;
-  justify-content: center;
-  align-self: center;
-  justify-self: center;
-}
-
-.logo {
-  height: 48px;
-  width: auto;
-  margin: 8px;
-}
-
-@media only screen and (max-width: 1200px) {
-  .logo {
-    height: 32px;
-  }
-
-  .weather-card {
-    margin-top: 20px;
-  }
-}
-
-.ant-page-header-heading-title {
-  font-size: 30px;
-  font-weight: 200;
 }
