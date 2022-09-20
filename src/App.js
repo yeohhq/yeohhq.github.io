@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function App() {
+const App = () => {
 	return (
 		<div>
 			<h1>Bookkeeper</h1>
@@ -10,9 +10,11 @@ export default function App() {
 					paddingBottom: '1rem'
 				}}
 			>
-				<Link to="/invoices">Invoices</Link> |{' '}
-				<Link to="/expenses">Expenses</Link>
+				<Link to="/portfolio">My Portfolio</Link> |{' '}
+				<Link to="/meteor">Rain or Shine</Link>
 			</nav>
 		</div>
 	)
 }
+
+export default App
