@@ -4,14 +4,20 @@ import moment from 'moment'
 import './DateTimePicker.css'
 
 const DateTimePicker = ({ setDate }) => {
-	const defaultDateTime = moment(new Date())
+	const defaultDateTime = moment(Date.now())
 	const [showError, setShowError] = useState(false)
 
-	const onOk = (value) => {
-		if (value.isBefore(new Date())) {
-			setDate(value)
+	const onChange = (value) => {
+		if (value.isSameOrBefore(Date.now())) {
+			setShowError(false)
 		} else {
 			setShowError(true)
+		}
+	}
+
+	const onOk = (value) => {
+		if (!showError) {
+			setDate(value)
 		}
 	}
 
@@ -25,7 +31,12 @@ const DateTimePicker = ({ setDate }) => {
 					closable
 				/>
 			) : null}
-			<DatePicker showTime defaultValue={defaultDateTime} onOk={onOk} />
+			<DatePicker
+				showTime
+				defaultValue={defaultDateTime}
+				onOk={onOk}
+				onChange={onChange}
+			/>
 		</Space>
 	)
 }
