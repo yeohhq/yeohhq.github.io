@@ -8,7 +8,9 @@ import DateTimePicker from './components/DateTimePicker'
 import Weather from './components/Weather'
 import Screenshot from './components/Screenshot'
 import LocationPicker from './components/LocationPicker'
-const { Content, Footer } = Layout
+import CustomFooter from './components/CustomFooter'
+import Loading from './components/Loading'
+const { Content } = Layout
 
 const dateTimeFormat = 'YYYY-MM-DD HH:mm:ss'
 const formatDateTime = (dateString) => {
@@ -19,6 +21,7 @@ const formatDateTime = (dateString) => {
 }
 
 const App = () => {
+	const [isLoading, setIsLoading] = useState(true)
 	const [date, setDate] = useState('')
 	const [location, setLocation] = useState('')
 	const [geoLocation, setGeolocation] = useState({})
@@ -64,6 +67,9 @@ const App = () => {
 					// Area data to map longitude and latitude to actual location
 					const areaData = result.area_metadata
 					setAreaData(areaData)
+
+					// Locations to display loaded, set to not loading
+					setIsLoading(false)
 				}
 
 				if (!_.isEmpty(result.items)) {
@@ -89,11 +95,13 @@ const App = () => {
 	// Map location name to weather
 	useEffect(() => {
 		if (!_.isEmpty(location)) {
-			weatherData.forEach((area) => {
-				if (area.area === location) {
-					setWeather(area.forecast)
-				}
-			})
+			if (!_.isEmpty(weatherData)) {
+				weatherData.forEach((area) => {
+					if (area.area === location) {
+						setWeather(area.forecast)
+					}
+				})
+			}
 		}
 	}, [location, weatherData])
 
@@ -134,31 +142,35 @@ const App = () => {
 						<DateTimePicker setDate={setDate} />
 					</Col>
 				</Row>
-				<Row gutter={16}>
-					<Col xl={8} xs={18}>
-						<LocationPicker
-							locations={areaData}
-							setLocation={setLocation}
-						/>
-					</Col>
-					<Col className="weather-card" xl={10} xs={18}>
-						<Weather locationName={location} weather={weather} />
-					</Col>
-				</Row>
+				{isLoading ? (
+					<Loading />
+				) : (
+					<div>
+						<Row gutter={16}>
+							<Col xl={8} xs={18}>
+								<LocationPicker
+									locations={areaData}
+									setLocation={setLocation}
+								/>
+							</Col>
+							<Col className="weather-container" xl={10} xs={18}>
+								<Weather
+									locationName={location}
+									weather={weather}
+								/>
+							</Col>
+						</Row>
 
-				<Row gutter={16}>
-					<Col span={18}>
-						<Screenshot imgSrc={imgSrc} />
-					</Col>
-				</Row>
+						<Row gutter={16}>
+							<Col span={18}>
+								<Screenshot imgSrc={imgSrc} />
+							</Col>
+						</Row>
+					</div>
+				)}
 			</Content>
-			<Footer
-				style={{
-					textAlign: 'center'
-				}}
-			>
-				Rain or Shine ©2022 Created by Yeoh Hui Qing
-			</Footer>
+
+			<CustomFooter />
 		</Layout>
 	)
 }

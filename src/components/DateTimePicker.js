@@ -7,6 +7,7 @@ const DateTimePicker = ({ setDate }) => {
 	const defaultDateTime = moment(Date.now())
 	const [showError, setShowError] = useState(false)
 
+	// Prevent error message from persisting if click on 'Now'
 	const onChange = (value) => {
 		if (value.isSameOrBefore(Date.now())) {
 			setShowError(false)

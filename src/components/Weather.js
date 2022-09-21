@@ -1,4 +1,4 @@
-import { Divider, Card, Row, Col, Empty } from 'antd'
+import { Card, Row, Empty } from 'antd'
 import {
 	WiDaySunny,
 	WiNightClear,
@@ -43,6 +43,7 @@ const Weather = ({ locationName, weather }) => {
 	const icon = getWeatherIcon('weather-icon', weather, 160, 'black')
 	return (
 		<Card
+			className="weather-card"
 			title={locationName || 'Weather Forecast'}
 			extra={<span className="weather-status">{weather}</span>}
 		>
